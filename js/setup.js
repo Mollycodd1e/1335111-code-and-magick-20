@@ -1,8 +1,5 @@
 'use strict';
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-
 var FIRST_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор',
   'Юлия', 'Люпита', 'Вашингтон'];
 
@@ -19,27 +16,37 @@ var getRandom = function (arr) {
   return arr[random];
 };
 
-var magePlayers = [
-  {
-    name: getRandom(FIRST_NAME) + ' ' + getRandom(SECOND_NAME),
-    coatColor: getRandom(COAT_COLOR),
-    eyesColor: getRandom(EYES_COLOR)
-  },
-  {
-    name: getRandom(FIRST_NAME) + ' ' + getRandom(SECOND_NAME),
-    coatColor: getRandom(COAT_COLOR),
-    eyesColor: getRandom(EYES_COLOR)
-  },
-  {
-    name: getRandom(FIRST_NAME) + ' ' + getRandom(SECOND_NAME),
-    coatColor: getRandom(COAT_COLOR),
-    eyesColor: getRandom(EYES_COLOR)
-  },
-  {
-    name: getRandom(FIRST_NAME) + ' ' + getRandom(SECOND_NAME),
-    coatColor: getRandom(COAT_COLOR),
-    eyesColor: getRandom(EYES_COLOR)
-  }
-];
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
 
-console.log(magePlayers);
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+var magePlayers = [];
+
+for (var i = 0; i < 4; i++) {
+  var object = {
+    name: getRandom(FIRST_NAME) + ' ' + getRandom(SECOND_NAME),
+    coatColor: getRandom(COAT_COLOR),
+    eyesColor: getRandom(EYES_COLOR)
+  };
+  magePlayers.push(object);
+}
+
+var renderWizard = function (magePlayers) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+  wizardElement.querySelector('.setup-similar-label').textContent = magePlayers.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = magePlayers.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = magePlayers.eyesColor;
+
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+for (var j = 0; j < magePlayers.length; j++) {
+  fragment.appendChild(renderWizard(magePlayers[j]));
+}
+
+similarListElement.appendChild(fragment);
+
+userDialog.querySelector('.setup-similar').classList.remove('hidden');
