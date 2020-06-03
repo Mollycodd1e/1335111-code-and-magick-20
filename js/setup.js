@@ -33,14 +33,16 @@ for (var i = 0; i < 4; i++) {
   magePlayers.push(object);
 }
 
-var renderWizard = function (magePlayers) {
+var renderWizard = function (mageArray) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = magePlayers.name;
-  wizardElement.querySelector('.wizard-coat').style.fill = magePlayers.coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = magePlayers.eyesColor;
+  wizardElement.querySelector('.setup-similar-label').textContent = mageArray.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = mageArray.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = mageArray.eyesColor;
 
   return wizardElement;
 };
+
+renderWizard(magePlayers);
 
 var fragment = document.createDocumentFragment();
 for (var j = 0; j < magePlayers.length; j++) {
