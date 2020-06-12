@@ -82,13 +82,13 @@ var onPopupEscPress = function (evt) {
 var openPopup = function () {
   setup.classList.remove('hidden');
 
-  document.addEventListener('keydown', onPopupEscPress)
+  document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
   
-  document.removeEventListener('keydown', onPopupEscPress)  
+  document.removeEventListener('keydown', onPopupEscPress);
 };
 
 setupOpen.addEventListener('click', function () {
