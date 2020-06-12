@@ -74,8 +74,8 @@ var userNameInput = document.querySelector('.setup-user-name');
 
 var onPopupEscPress = function (evt) {
   if (evt.key === 'Escape') {
-      evt.preventDefault();
-      closePopup();
+    evt.preventDefault();
+    closePopup();
   }
 };
 
@@ -97,7 +97,7 @@ setupOpen.addEventListener('click', function () {
 
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-   openPopup();
+    openPopup();
   }
 });
 
@@ -107,7 +107,7 @@ setupClose.addEventListener('click', function () {
 
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.key === 'Enter') {
-   closePopup();
+    closePopup();
   }
 });
 
@@ -132,11 +132,11 @@ userNameInput.addEventListener('input', function () {
 });
 
 userNameInput.addEventListener('focus', function () {
-  document.removeEventListener('keydown', onPopupEscPress)
+  document.removeEventListener('keydown', onPopupEscPress);
 });
 
 userNameInput.addEventListener('blur', function () {
-  document.addEventListener('keydown', onPopupEscPress)
+  document.addEventListener('keydown', onPopupEscPress);
 });
 
 var wizardSetup = document.querySelector('.setup-wizard');
