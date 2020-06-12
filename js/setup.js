@@ -87,7 +87,6 @@ var openPopup = function () {
 
 var closePopup = function () {
   setup.classList.add('hidden');
-  
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
@@ -123,9 +122,9 @@ userNameInput.addEventListener('input', function () {
   var valueLength = userNameInput.value.length;
 
   if (valueLength < MIN_NAME_LENGTH) {
-    userNameInput.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) +' симв.');
+    userNameInput.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
   } else if (valueLength > MAX_NAME_LENGTH) {
-    userNameInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) +' симв.');
+    userNameInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
   } else {
     userNameInput.setCustomValidity('');
   }
