@@ -1,12 +1,6 @@
 'use strict';
 
 (function () {
-  //  var FIRST_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор',
-  //  'Юлия', 'Люпита', 'Вашингтон'];
-
-  //  var SECOND_NAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая',
-  //  'Нионго', 'Ирвинг'];
-
   var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)',
     'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 
@@ -27,22 +21,6 @@
   var similarListElement = userDialog.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-  /*
-    wizards = [];
-
-    var createWizard = function (wizards) {
-    for (var i = 0; i < count; i++) {
-      wizards.push({
-        name: getRandomValue(FIRST_NAME) + ' ' + getRandomValue(SECOND_NAME),
-        coatColor: getRandomValue(COAT_COLOR),
-        eyesColor: getRandomValue(EYES_COLOR)
-      });
-    }
-    return wizards;
-  };
-
-  createWizard(MAGE_COUNT); */
-
   var renderWizard = function (wizards) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
@@ -62,19 +40,7 @@
 
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
-  var showError = function (errorMessage) {
-    var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
-    node.style.fontSize = '30px';
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
-
-  window.backend.load(loadSuccess, showError);
+  window.backend.load(loadSuccess, window.backend.showError);
 
   var form = userDialog.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
