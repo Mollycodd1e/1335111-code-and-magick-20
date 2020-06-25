@@ -1,12 +1,6 @@
 'use strict';
 
 (function () {
-  var FIRST_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор',
-    'Юлия', 'Люпита', 'Вашингтон'];
-
-  var SECOND_NAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая',
-    'Нионго', 'Ирвинг'];
-
   var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)',
     'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 
@@ -27,43 +21,34 @@
   var similarListElement = userDialog.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-  var wizards = [];
-
-  var createWizard = function (count) {
-    for (var i = 0; i < count; i++) {
-      wizards.push({
-        name: getRandomValue(FIRST_NAME) + ' ' + getRandomValue(SECOND_NAME),
-        coatColor: getRandomValue(COAT_COLOR),
-        eyesColor: getRandomValue(EYES_COLOR)
-      });
-    }
-    return wizards;
-  };
-
-  createWizard(MAGE_COUNT);
-
-  var renderWizard = function (mageArray) {
+  var renderWizard = function (wizards) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = mageArray.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = mageArray.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = mageArray.eyesColor;
+    wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizards.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizards.colorEyes;
 
     return wizardElement;
   };
 
-  renderWizard(wizards);
-
-  var renderWizards = function (count) {
+  var loadSuccess = function (wizards) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < count; i++) {
+    for (var i = 0; i < MAGE_COUNT; i++) {
       fragment.appendChild(renderWizard(wizards[i]));
     }
     similarListElement.appendChild(fragment);
   };
 
-  renderWizards(MAGE_COUNT);
-
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+  window.backend.load(loadSuccess, window.backend.showError);
+
+  var form = userDialog.querySelector('.setup-wizard-form');
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), function () {
+      userDialog.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
 
   window.setup = {
     FIREBALL_COLOR: FIREBALL_COLOR,
