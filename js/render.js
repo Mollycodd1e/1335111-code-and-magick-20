@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
   var MAGE_COUNT = 4;
 
@@ -15,7 +17,14 @@
   };
 
   var render = function (data) {
-    var takeNumber = data.length > MAGE_COUNT ? MAGE_COUNT : data.length;
+    var takeNumber;
+
+    if (data.length > MAGE_COUNT) {
+      takeNumber = MAGE_COUNT;
+    } else {
+      takeNumber = data.length;
+    }
+
     similarListElement.innerHTML = '';
     for (var i = 0; i < takeNumber; i++) {
       similarListElement.appendChild(renderWizard(data[i]));
@@ -24,5 +33,5 @@
 
   window.render = {
     render: render
-  }
+  };
 })();
